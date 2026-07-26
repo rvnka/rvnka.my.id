@@ -1,465 +1,769 @@
+<!-- status: ready for deploy -->
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ringga (@rvnka)</title>
+    <meta name="description" content="Ringga (@rvnka) - Developer, Editor & Student. Personal link-in-bio page." />
+    <meta name="keywords" content="rvnka, rinn, ringga, developer, editor, profile" />
+    <meta name="author" content="rvnka" />
+    <meta name="robots" content="noindex, nofollow" />
 
-  <!-- Primary -->
-  <title>Ringga (@rvnka)</title>
-  <meta name="description" content="" />
-  <meta name="keywords" content="rvnka, rinn, ringga, developer, editor, profile" />
-  <meta name="author" content="rvnka" />
-  <meta name="robots" content="noindex, nofollow" />
-  <link rel="canonical" href="https://rvnka.my.id" />
+    <!-- Canonical & Icons -->
+    <link rel="canonical" href="https://rvnka.my.id" />
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/99320495" sizes="any" />
+    <link rel="apple-touch-icon" href="https://avatars.githubusercontent.com/u/99320495" />
 
-  <!-- Theme & app -->
-  <meta name="theme-color" content="#0f0f0f" />
-  <meta name="color-scheme" content="dark" />
-  <meta name="application-name" content="@rvnka's Site" />
+    <!-- Theme -->
+    <meta name="theme-color" content="#0a0a0f" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="application-name" content="@rvnka's Site" />
 
-  <!-- Fonts & icons -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/misans/lib/Normal/MiSans-Medium.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="Ringga (@rvnka)" />
+    <meta property="og:description" content="Developer, Editor & Student - personal profile and links." />
+    <meta property="og:url" content="https://rvnka.my.id" />
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/99320495" />
+    <meta property="og:image:width" content="460" />
+    <meta property="og:image:height" content="460" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
 
-  <style>
-    :root {
-      /* Colors */
-      --bg:            #0f0f0f;   /* page background */
-      --card:          #1a1a1a;   /* card surface */
-      --hover:         #242424;   /* link-item resting bg */
-      --badge:         #2a2a2a;   /* skill badge & btn-icon hover bg */
-      --border:        #2a2a2a;   /* card / avatar / separator borders */
-      --t1:            #fff;      /* primary text */
-      --t2:            #c4c4c4;   /* secondary text */
-      --t3:            #808080;   /* muted / label text */
-      --accent-border: #555;      /* hover border & arrow color */
-      --selection-bg:  rgba(255,255,255,.15);
-    
-      /* Shape & spacing */
-      --r:             12px;   /* global border-radius */
-      --sp:            16px;   /* global spacing unit */
-    
-      /* Layout */
-      --grid-max-width:  700px;
-      --grid-gap:        12px;
-      --row-gap:         12px;
-      --row-col-mobile:  1fr;
-      --row-col-desktop: 0.4fr 0.6fr;
-    
-      /* Avatar */
-      --avatar-size:   64px;
-      --avatar-border: 2px solid var(--border);
-    
-      /* Clock */
-      --clock-time-size: 1.8rem;
-    
-      /* Animation */
-      --enter-blur:       25px;
-      --enter-translateY: 16px;
-      --enter-duration:   0.55s;
-      --enter-easing:     cubic-bezier(0.22, 1, 0.36, 1);
-      --enter-delay-1:    0.05s;
-      --enter-delay-2:    0.18s;
-      --enter-delay-3:    0.30s;
-    
-      /* Marquee */
-      --marquee-speed:   20s;
-    }
-    
-    /* Reset */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    ::selection { background: var(--selection-bg); color: inherit; }
-    * { -webkit-tap-highlight-color: transparent; outline-color: rgba(255,255,255,.3); }
-    
-    /* Base */
-    body {
-      font-family: 'MiSans', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--t1);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--sp);
-    }
-    
-    /* Entrance animation */
-    @keyframes enter {
-      from { opacity: 0; filter: blur(var(--enter-blur)); transform: translateY(var(--enter-translateY)); }
-      to   { opacity: 1; filter: blur(0);                 transform: translateY(0); }
-    }
-    
-    /* Layout */
-    .grid {
-      max-width: var(--grid-max-width);
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: var(--grid-gap);
-    }
-    
-    .grid > * {
-      animation: enter var(--enter-duration) var(--enter-easing) both;
-      will-change: transform, opacity;
-    }
-    .grid > *:nth-child(1) { animation-delay: var(--enter-delay-1); }
-    .grid > *:nth-child(2) { animation-delay: var(--enter-delay-2); }
-    .grid > *:nth-child(3) { animation-delay: var(--enter-delay-3); }
-    
-    .row {
-      display: grid;
-      grid-template-columns: var(--row-col-mobile);
-      gap: var(--row-gap);
-    }
-    
-    @media (min-width: 600px) {
-      .row { grid-template-columns: var(--row-col-desktop); }
-    }
-    
-    /* Card */
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .card-head {
-      padding: 10px var(--sp);
-      border-bottom: 1px solid var(--border);
-      font-size: 14px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .card-body { padding: 14px var(--sp); flex: 1; }
-    
-    /* Header profile */
-    .profile {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 24px;
-    }
-    
-    .user { display: flex; align-items: center; gap: 16px; }
-    
-    .avatar {
-      width: var(--avatar-size);
-      height: var(--avatar-size);
-      border-radius: 50%;
-      object-fit: cover;
-      border: var(--avatar-border);
-    }
-    
-    .user-name {
-      font-size: 1.4rem;
-      font-weight: 600;
-      line-height: 1.2;
-    }
-    .user-role { font-size: .9rem; color: var(--t3); margin-top: 5px; }
-    
-    .sep { width: 1px; height: 50px; background: var(--border); margin: 0 24px; }
-    
-    /* Clock */
-    .clock { text-align: right; min-width: 110px; }
-    .clock-date { font-size: 12px; color: var(--t2); opacity: .8; margin-bottom: 2px; }
-    .clock-tz   { font-size: 11px; color: var(--t3); margin-bottom: 2px; }
-    .clock-time {
-      font-size: var(--clock-time-size);
-      font-weight: 500;
-      font-variant-numeric: tabular-nums;
-      letter-spacing: .05em;
-    }
-    
-    /* About */
-    .about {
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--t2);
-      margin-bottom: 16px;
-    }
-    .about del { opacity: .6; color: #666; }
-    
-    .section-label {
-      font-size: 13px;
-      font-weight: 600;
-      opacity: .7;
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      padding-bottom: 6px;
-      margin-bottom: 10px;
-    }
-    
-    /* Marquee */
-    .marquee {
-      overflow: hidden;
-      mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-      -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-      user-select: none;
-      pointer-events: none;
-      contain: layout;
-    }
-    
-    @keyframes scroll { to { transform: translateX(-50%); } }
-    
-    .marquee-track {
-      display: flex;
-      gap: 8px;
-      width: max-content;
-      animation: scroll var(--marquee-speed) linear infinite;
-      will-change: transform;
-    }
-    
-    .badge {
-      background: var(--badge);
-      color: var(--t2);
-      font-size: 12px;
-      padding: 3px 10px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      white-space: nowrap;
-    }
-    
-    /* Shared hover transition */
-    .btn-icon, .link-item { transition: background .15s, border-color .15s; }
-    
-    /* Social buttons */
-    .btn-row { display: flex; gap: 8px; margin-bottom: 12px; }
-    
-    .btn-icon {
-      width: 42px;
-      height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      color: var(--t1);
-      text-decoration: none;
-      font-size: 1.2rem;
-    }
-    .btn-icon:hover { background: var(--badge); border-color: var(--accent-border); }
-    
-    /* Link list */
-    .link-list { display: flex; flex-direction: column; gap: 8px; }
-    
-    .link-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 12px;
-      border-radius: 8px;
-      background: var(--hover);
-      border: 1px solid var(--border);
-      text-decoration: none;
-      color: inherit;
-    }
-    .link-item:hover { background: var(--badge); border-color: var(--accent-border); }
-    
-    .link-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--badge);
-      border-radius: 7px;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--t2);
-      flex-shrink: 0;
-    }
-    
-    .link-detail { flex: 1; overflow: hidden; }
-    
-    .link-title, .link-url { display: block; line-height: 1.3; }
-    .link-title { font-size: 13px; font-weight: 600; color: var(--t1); }
-    .link-url   { font-size: 11px; color: var(--t3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    
-    .link-arrow { color: var(--accent-border); font-size: 14px; }
-    
-    /* Footer */
-    .footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--t3);
-      font-size: 14px;
-    }
-    .footer a { color: inherit; text-decoration: none; transition: color .2s; }
-    .footer a:hover { color: var(--t1); }
-    
-    /* Responsive */
-    @media (max-width: 500px) {
-      .profile { flex-direction: column; align-items: flex-start; gap: 14px; padding: 16px; }
-      .sep { display: none; }
-      .clock { text-align: left; width: 100%; border-top: 1px solid var(--border); padding-top: 12px; }
-      .footer { font-size: 12px; }
-    }
-  </style>
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Ringga (@rvnka)" />
+    <meta name="twitter:description" content="Developer, Editor & Student - personal profile and links." />
+    <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/99320495" />
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/misans/lib/Normal/MiSans-Medium.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <style>
+        :root {
+          --bg:                  #0a0a0f;
+          --color-ink-1:         #e8e8f0;
+          --color-ink-2:         #88889a;
+          --color-ink-3:         #5a5a6e;
+          --color-ink-4:         #3a3a4a;
+          --color-accent:        #a371f7;
+          --color-accent-soft:   rgba(163, 113, 247, 0.1);
+
+          --font-body:      'MiSans', system-ui, -apple-system, sans-serif;
+          --space-main:     clamp(16px, 2.5vw, 24px);
+          --grid-gap:       16px;
+          --grid-max-width: 700px;
+          --avatar-size:    72px;
+          --radius:         12px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        ::selection { background: rgba(163, 113, 247, 0.2); }
+        * { -webkit-tap-highlight-color: transparent; }
+
+        body {
+          font-family: var(--font-body);
+          background: var(--bg);
+          color: var(--color-ink-1);
+          height: 100dvh;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: clamp(32px, 8vw, 80px) 20px;
+          position: relative;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          contain: layout style;
+          user-select: none;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        :focus-visible {
+          outline: 2px solid var(--color-accent);
+          outline-offset: 2px;
+          border-radius: 6px;
+        }
+
+        /* --- Ambient Background --- */
+        .ambient { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+
+        .orb { position: absolute; border-radius: 50%; filter: blur(80px); will-change: transform; }
+
+        .orb-1 { width: 500px; height: 500px; background: rgba(163, 113, 247, 0.10); top: -15%; left: -10%; animation: orb-float-1 25s ease-in-out infinite; }
+        .orb-2 { width: 400px; height: 400px; background: rgba(88, 166, 255, 0.07); bottom: -10%; right: -10%; animation: orb-float-2 30s ease-in-out infinite; }
+        .orb-3 { width: 350px; height: 350px; background: rgba(163, 113, 247, 0.06); top: 50%; left: 50%; transform: translate(-50%, -50%); animation: orb-float-3 20s ease-in-out infinite; }
+
+        @keyframes orb-float-1 {
+          0%, 100% { transform: translate(0, 0); }
+          33%      { transform: translate(80px, 60px); }
+          66%      { transform: translate(-40px, 100px); }
+        }
+
+        @keyframes orb-float-2 {
+          0%, 100% { transform: translate(0, 0); }
+          33%      { transform: translate(-70px, -50px); }
+          66%      { transform: translate(50px, -80px); }
+        }
+
+        @keyframes orb-float-3 {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); }
+          50%      { transform: translate(-30%, -40%) scale(1.08); }
+        }
+
+        .ambient-noise {
+          position: absolute; inset: 0;
+          opacity: 0.015;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          background-repeat: repeat;
+          background-size: 256px 256px;
+          mix-blend-mode: overlay;
+        }
+
+        .spotlight { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(450px circle at var(--x,50%) var(--y,50%), rgba(255,255,255,0.03), transparent 50%); }
+
+        /* --- Layout --- */
+        .grid {
+          max-width: var(--grid-max-width);
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: var(--grid-gap);
+          position: relative;
+          z-index: 2;
+          contain: layout paint style;
+        }
+
+        .grid > * {
+          opacity: 0;
+          animation: card-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          animation-delay: calc(0.04s + var(--i, 0) * 0.08s);
+        }
+
+        @keyframes card-in {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .row {
+          flex: 1;
+          min-height: 0;
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--grid-gap);
+        }
+
+        @media (min-width: 600px) {
+          .row { grid-template-columns: 0.4fr 0.6fr; }
+        }
+
+        /* --- Card --- */
+        .card {
+          position: relative;
+          background: rgba(255, 255, 255, 0.02);
+          backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: var(--radius);
+          overflow: hidden;
+          touch-action: pan-y pinch-zoom;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.04);
+          transition: box-shadow 0.3s;
+          contain: paint layout style;
+
+          --mx: 0;
+          --my: 0;
+          --glow: 0;
+        }
+
+        .card::before, .card::after {
+          content: ""; position: absolute; inset: 0; border-radius: inherit;
+          pointer-events: none; transition: opacity 0.3s; opacity: var(--glow);
+        }
+        .card::before {
+          padding: 1px;
+          background: radial-gradient(200px circle at calc(var(--mx)*1px) calc(var(--my)*1px), rgba(255,255,255,0.6), transparent 50%);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor; mask-composite: exclude;
+        }
+        .card::after {
+          background: radial-gradient(350px circle at calc(var(--mx)*1px) calc(var(--my)*1px), rgba(163,113,247,0.12), transparent 60%);
+        }
+
+        .card-head {
+          padding: 12px var(--space-main);
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+          font-size: 0.8rem;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: var(--color-ink-2);
+          letter-spacing: 0.03em;
+        }
+
+        .card-body { padding: var(--space-main); }
+
+        /* --- Profile --- */
+        .profile {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+        }
+
+        .profile-main {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          flex: 1;
+          min-width: 0;
+        }
+
+        .avatar {
+          width: var(--avatar-size);
+          height: var(--avatar-size);
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid rgba(163,113,247,0.25);
+          box-shadow: 0 0 24px rgba(163,113,247,0.1);
+          flex-shrink: 0;
+          transition: border-color 0.3s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+        }
+        .avatar:hover {
+          border-color: var(--color-accent);
+          transform: scale(1.06);
+          box-shadow: 0 0 40px rgba(163,113,247,0.18);
+        }
+
+        .profile-info { min-width: 0; }
+
+        .name {
+          font-size: 1.35rem;
+          font-weight: 700;
+          line-height: 1.2;
+          background: linear-gradient(180deg, #f0f0f8 50%, #b8b8cc);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .handle {
+          font-size: 0.82rem;
+          color: var(--color-accent);
+          font-weight: 500;
+          margin-top: 2px;
+        }
+
+        .role {
+          font-size: 0.75rem;
+          color: var(--color-ink-3);
+          margin-top: 4px;
+        }
+
+        .sep {
+          width: 1px;
+          height: 56px;
+          background: rgba(255,255,255,0.08);
+          flex-shrink: 0;
+        }
+
+        /* --- Clock --- */
+        .clock {
+          text-align: right;
+          flex-shrink: 0;
+        }
+
+        .clock-date {
+          font-size: 0.7rem;
+          color: var(--color-ink-3);
+          margin-bottom: 2px;
+        }
+
+        .clock-tz {
+          font-size: 0.65rem;
+          color: var(--color-ink-4);
+          margin-bottom: 2px;
+        }
+
+        .clock-time {
+          font-size: 1.5rem;
+          font-weight: 500;
+          font-variant-numeric: tabular-nums;
+          letter-spacing: 0.03em;
+          color: #f0f0f8;
+          line-height: 1.2;
+        }
+
+        /* --- About --- */
+        .about {
+          font-size: 0.85rem;
+          line-height: 1.7;
+          color: var(--color-ink-2);
+          overflow-wrap: break-word;
+          max-height: clamp(100px,22vh,200px);
+          overflow-y: auto;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255,255,255,0.08) transparent;
+          user-select: text;
+        }
+
+        .section-divider {
+          height: 1px;
+          background: rgba(255,255,255,0.06);
+          margin: 14px 0;
+        }
+
+        .section-label {
+          font-size: 0.7rem;
+          font-weight: 600;
+          color: var(--color-ink-3);
+          letter-spacing: 0.05em;
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        /* --- Skills --- */
+        .skills {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+          gap: 6px;
+          justify-items: center;
+          overflow-y: auto;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255,255,255,0.08) transparent;
+        }
+
+        .card:has(.about, .link-list) {
+          display: flex;
+          flex-direction: column;
+          min-height: 0;
+        }
+        .card:has(.about, .link-list) .card-body {
+          display: flex;
+          flex-direction: column;
+          min-height: 0;
+          flex: 1;
+        }
+
+        .badge {
+          background: rgba(163, 113, 247, 0.06);
+          color: var(--color-ink-1);
+          font-size: 0.7rem;
+          padding: 4px 12px;
+          border-radius: 999px;
+          border: 1px solid rgba(163, 113, 247, 0.12);
+          white-space: nowrap;
+          touch-action: manipulation;
+          transition: background 0.2s, border-color 0.2s, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+        }
+        .badge:hover {
+          background: rgba(163, 113, 247, 0.12);
+          border-color: rgba(163, 113, 247, 0.3);
+          transform: translateY(-1px);
+          box-shadow: 0 2px 12px rgba(163, 113, 247, 0.12);
+        }
+        /* --- Links --- */
+        .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; justify-content: center; }
+
+        .btn-icon {
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: calc(var(--radius) - 2px);
+          font-size: 1.1rem;
+          background: rgba(255, 255, 255, 0.02);
+          backdrop-filter: blur(8px);
+          touch-action: manipulation;
+          transition: background 0.2s, border-color 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+        }
+        .btn-icon:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.14); transform: translateY(-3px); box-shadow: 0 4px 16px rgba(163,113,247,0.12); }
+        .btn-icon:active { transform: translateY(0) scale(0.95); transition-duration: 0.08s; }
+
+        .link-list {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          overflow-y: auto;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255,255,255,0.08) transparent;
+        }
+
+        .card:has(.about) .skills, .card:has(.link-list) .link-list { flex: 1; min-height: 0; }
+
+        .link-item {
+          display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: calc(var(--radius) - 2px);
+          background: rgba(255, 255, 255, 0.015);
+          backdrop-filter: blur(8px);
+          border: 1px solid rgba(255,255,255,0.06);
+          touch-action: manipulation;
+          transition: background 0.2s, border-color 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+        }
+        .link-item:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(163,113,247,0.08); }
+        .link-item:active { transform: translateY(0) scale(0.99); transition-duration: 0.08s; }
+
+        .link-icon {
+          width: 34px; height: 34px; background: rgba(255,255,255,0.03); border-radius: calc(var(--radius) - 4px);
+          border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; color: var(--color-ink-2); flex-shrink: 0;
+          transition: color 0.2s, border-color 0.2s;
+        }
+        .link-item:hover .link-icon { color: var(--color-accent); border-color: rgba(163,113,247,0.25); }
+
+        .link-detail { flex: 1; overflow: hidden; }
+        .link-title, .link-url { display: block; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .link-title { font-size: 0.85rem; font-weight: 600; color: #f0f0f8; }
+        .link-url   { font-size: 0.7rem; color: var(--color-ink-2); margin-top: 2px; }
+        .link-arrow {
+          color: var(--color-ink-3); font-size: 0.85rem; flex-shrink: 0;
+          transition: transform 0.2s ease, opacity 0.2s ease; opacity: 0.4;
+        }
+        .link-item:hover .link-arrow { transform: translateX(4px); opacity: 1; }
+
+        .link-tag {
+          font-size: 0.6rem;
+          font-weight: 500;
+          color: var(--color-accent);
+          background: var(--color-accent-soft);
+          padding: 1px 7px;
+          border-radius: 4px;
+          margin-left: 6px;
+          vertical-align: middle;
+          border: 1px solid rgba(163,113,247,0.18);
+        }
+
+        /* --- Footer --- */
+        .footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          color: var(--color-ink-3);
+          font-size: 0.75rem;
+        }
+        .footer a { transition: color 0.2s; }
+        .footer a:hover { color: var(--color-ink-1); }
+
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 4px; }
+
+        /* --- Responsive --- */
+        @media (max-width: 600px) {
+          body {
+            height: auto;
+            overflow: auto;
+            align-items: flex-start;
+            padding: clamp(20px, 5vw, 40px) 16px clamp(32px, 8vw, 80px);
+          }
+
+          .grid { height: auto; }
+
+          .row { overflow: visible; flex: none; }
+
+          .card:has(.about) .skills {
+            flex: none;
+            max-height: 200px;
+          }
+          .card:has(.link-list) .link-list {
+            flex: none;
+            max-height: 280px;
+          }
+
+          .profile {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 16px;
+          }
+
+          .sep { display: none; }
+
+          .clock {
+            text-align: left;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 14px;
+          }
+        }
+
+        @media (max-width: 400px) {
+          body { padding-left: 12px; padding-right: 12px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .orb, .grid > * { animation: none; }
+          .grid > * { opacity: 1; transform: none; }
+          :is(.card, .card::before, .card::after, .link-item, .btn-icon, .badge, .avatar, .footer a) { transition: none; transform: none; }
+          .badge:hover, .link-item:hover .link-arrow { transform: none; }
+        }
+    </style>
 </head>
 
 <body>
-  <main class="grid">
-
-    <!-- Header -->
-    <div class="card">
-      <div class="profile">
-        <div class="user">
-          <img class="avatar" src="https://avatars.githubusercontent.com/u/99320495" alt="Rinn's avatar" width="64" height="64" decoding="async" />
-          <div>
-            <p class="user-name">Ringga (@rvnka)</p>
-            <p class="user-role">Developer | Editor | Student</p>
-          </div>
-        </div>
-        <div class="sep" aria-hidden="true"></div>
-        <div class="clock">
-          <p id="date" class="clock-date">-</p>
-          <p id="tz" class="clock-tz"></p>
-          <p id="clock" class="clock-time">00:00:00</p>
-        </div>
-      </div>
+    <div class="ambient">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="ambient-noise"></div>
     </div>
+    <div class="spotlight" id="spotlight"></div>
 
-    <!-- Content row -->
-    <div class="row">
-
-      <!-- About -->
-      <div class="card">
-        <div class="card-head"><i class="bi bi-person-fill"></i> About Me</div>
-        <div class="card-body">
-          <p class="about">
-            <del>An idle vocational student</del><br>
-            I am a beginner developer, editor and student who enjoys learning new things and breaking stuff‽. I build things out of curiosity, interest, and the fun of seeing ideas turn into something real.
-          </p>
-          <p class="section-label"><i class="bi bi-lightning-charge-fill"></i> Skills</p>
-          <div class="marquee">
-            <div class="marquee-track" id="skill-track">
-              <span class="badge">NodeJS</span>
-              <span class="badge">Python</span>
-              <span class="badge">NextJS</span>
-              <span class="badge">React</span>
-              <span class="badge">JavaScript</span>
-              <span class="badge">HTML</span>
-              <span class="badge">CSS</span>
-              <span class="badge">Git</span>
+    <main class="grid">
+        <section class="card">
+            <div class="card-body">
+                <div class="profile">
+                    <div class="profile-main">
+                        <img class="avatar" src="https://avatars.githubusercontent.com/u/99320495" alt="Ringga's avatar" width="72" height="72" decoding="async" />
+                        <div class="profile-info">
+                            <h1 class="name">Ringga</h1>
+                            <p class="handle">@rvnka</p>
+                            <p class="role">Developer · Editor · Student</p>
+                        </div>
+                    </div>
+                    <div class="sep" aria-hidden="true"></div>
+                    <div class="clock">
+                        <p id="date" class="clock-date"></p>
+                        <p id="tz" class="clock-tz"></p>
+                        <p id="clock" class="clock-time">00:00:00</p>
+                    </div>
+                </div>
             </div>
-          </div>
+        </section>
+
+        <div class="row">
+            <section class="card">
+                <div class="card-head"><i class="bi bi-person-fill" aria-hidden="true"></i> About Me</div>
+                <div class="card-body">
+                    <p class="about">
+                        <del>An idle vocational student</del><br>
+                        I'm a beginner developer, editor, and student who enjoys learning new things and breaking stuff‽. I build things out of curiosity - for the fun of seeing ideas turn into something real. Sometimes I spend way too many hours debugging a single missing semicolon, only to realize the real problem was that I forgot to save the file in the first place. But hey, that's the learning process! On a good day, I can deploy a half-baked feature before the coffee kicks in. On a great day, I remember to drink the coffee. This paragraph is intentionally long to make sure the card handles extended descriptive text without any layout glitches or overflow issues.
+                    </p>
+                    <div class="section-divider"></div>
+                    <p class="section-label"><i class="bi bi-lightning-charge-fill" aria-hidden="true"></i> Skills</p>
+                    <div class="skills">
+                        <span class="badge">NodeJS</span>
+                        <span class="badge">Python</span>
+                        <span class="badge">NextJS</span>
+                        <span class="badge">React</span>
+                        <span class="badge">JavaScript</span>
+                        <span class="badge">TypeScript</span>
+                        <span class="badge">HTML</span>
+                        <span class="badge">CSS</span>
+                        <span class="badge">Sass</span>
+                        <span class="badge">Tailwind</span>
+                        <span class="badge">Git</span>
+                        <span class="badge">Docker</span>
+                        <span class="badge">PostgreSQL</span>
+                        <span class="badge">MongoDB</span>
+                        <span class="badge">Redis</span>
+                        <span class="badge">GraphQL</span>
+                        <span class="badge">REST API</span>
+                        <span class="badge">Linux</span>
+                        <span class="badge">Figma</span>
+                        <span class="badge">Photoshop</span>
+                        <span class="badge">Premiere Pro</span>
+                        <span class="badge">After Effects</span>
+                        <span class="badge">Blender</span>
+                        <span class="badge">Nginx</span>
+                        <span class="badge">Postman</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-head"><i class="bi bi-link-45deg" aria-hidden="true"></i> Links</div>
+                <div class="card-body">
+                    <div class="btn-row">
+                        <a class="btn-icon" href="https://github.com/rvnka" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+                        <a class="btn-icon" href="https://www.youtube.com/@rvnka_yt" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube" aria-hidden="true"></i></a>
+                        <a class="btn-icon" href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="bi bi-twitter-x" aria-hidden="true"></i></a>
+                        <a class="btn-icon" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram" aria-hidden="true"></i></a>
+                        <a class="btn-icon" href="#" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="bi bi-discord" aria-hidden="true"></i></a>
+                        <a class="btn-icon" href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
+                        <a class="btn-icon" href="#" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><i class="bi bi-spotify" aria-hidden="true"></i></a>
+                    </div>
+                    <nav class="link-list" aria-label="Links">
+                        <a class="link-item" href="https://site.rvnka.my.id/" target="_blank" rel="noopener noreferrer">
+                            <div class="link-icon"><i class="bi bi-window" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">Website <span class="link-tag">in dev</span></span>
+                                <span class="link-url">site.rvnka.my.id</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                        <a class="link-item" href="#">
+                            <div class="link-icon"><i class="bi bi-lightning-charge-fill" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">Rest API</span>
+                                <span class="link-url">Coming soon</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                        <a class="link-item" href="https://github.com/rvnka" target="_blank" rel="noopener noreferrer">
+                            <div class="link-icon"><i class="bi bi-github" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">GitHub Profile</span>
+                                <span class="link-url">github.com/rvnka</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                        <a class="link-item" href="https://www.youtube.com/@rvnka_yt" target="_blank" rel="noopener noreferrer">
+                            <div class="link-icon"><i class="bi bi-youtube" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">YouTube Channel</span>
+                                <span class="link-url">youtube.com/@rvnka_yt</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                        <a class="link-item" href="#">
+                            <div class="link-icon"><i class="bi bi-journal-code" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">Blog - Coming Soon</span>
+                                <span class="link-url">blog.rvnka.my.id (not yet)</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                        <a class="link-item" href="#">
+                            <div class="link-icon"><i class="bi bi-camera-video" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">Portfolio with an Extremely Long Title That Might Break Layout</span>
+                                <span class="link-url">this-is-a-very-long-url-that-should-be-truncated-with-ellipsis.test/portfolio/showcase</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                        <a class="link-item" href="#">
+                            <div class="link-icon"><i class="bi bi-people" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">Community Forum</span>
+                                <span class="link-url">forum.example.com</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                        <a class="link-item" href="#">
+                            <div class="link-icon"><i class="bi bi-book" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">Documentation</span>
+                                <span class="link-url">docs.example.com</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                        <a class="link-item" href="#">
+                            <div class="link-icon"><i class="bi bi-shop" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">Merch Store</span>
+                                <span class="link-url">shop.rvnka.my.id</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                        <a class="link-item" href="#">
+                            <div class="link-icon"><i class="bi bi-envelope" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">Contact Me / Business Inquiries</span>
+                                <span class="link-url">contact.rvnka.my.id</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                        <a class="link-item" href="#">
+                            <div class="link-icon"><i class="bi bi-gem" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">Support / Donate</span>
+                                <span class="link-url">ko-fi.com/rvnka</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                    </nav>
+                </div>
+            </section>
         </div>
-      </div>
 
-      <!-- Links -->
-      <div class="card">
-        <div class="card-head"><i class="bi bi-link-45deg"></i> Links</div>
-        <div class="card-body">
-          <div class="btn-row">
-            <a class="btn-icon" href="https://github.com/rvnka" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github"></i></a>
-            <a class="btn-icon" href="https://www.youtube.com/@rvnka_yt" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-          </div>
-          <div class="link-list">
-            <a class="link-item" href="https://site.rvnka.my.id/" target="_blank" rel="noopener noreferrer">
-              <div class="link-icon"><i class="bi bi-window"></i></div>
-              <div class="link-detail">
-                <span class="link-title">Website (on development)</span>
-                <span class="link-url">site.rvnka.my.id</span>
-              </div>
-              <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
-            </a>
-            <a class="link-item" href="#">
-              <div class="link-icon"><i class="bi bi-lightning-charge-fill"></i></div>
-              <div class="link-detail">
-                <span class="link-title">Rest API</span>
-                <span class="link-url">Coming Soon!</span>
-              </div>
-              <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-      </div>
+        <section class="card">
+            <div class="card-body">
+                <footer class="footer">
+                    <span>&copy; 2025&ndash;<span id="year"></span></span>
+                    <a href="https://rvnka.my.id">rvnka.my.id</a>
+                </footer>
+            </div>
+        </section>
+    </main>
 
-    </div>
+    <script>
+        const CONFIG = { timezone: 'Asia/Jakarta', locale: 'en-US' };
+        const $ = id => document.getElementById(id);
+        const tzEl = $('tz'), yearEl = $('year'), dateEl = $('date'), clockEl = $('clock');
 
-    <!-- Footer -->
-    <div class="card">
-      <div class="card-body">
-        <div class="footer">
-          <span>&copy; 2025&ndash;<span id="year"></span></span>
-          <a href="https://rvnka.my.id">rvnka.my.id</a>
-        </div>
-      </div>
-    </div>
+        const tzValue = new Intl.DateTimeFormat(CONFIG.locale, { timeZone: CONFIG.timezone, timeZoneName: 'shortOffset' })
+          .formatToParts(new Date()).find(p => p.type === 'timeZoneName')?.value ?? '';
+        tzEl.textContent = tzValue.replace('GMT', 'UTC');
+        yearEl.textContent = new Date().getFullYear();
 
-  </main>
+        const fmtDate = new Intl.DateTimeFormat(CONFIG.locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: CONFIG.timezone });
+        const fmtTime = new Intl.DateTimeFormat(CONFIG.locale, { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: CONFIG.timezone });
 
-  <script>
-    const CONFIG = {
-      timezone:       'Asia/Jakarta',   // IANA timezone for the clock
-      clockLocale:    'en-US',          // locale for date & time formatting
-      dateFormat: {                     // Intl.DateTimeFormat options for the date line
-        weekday: 'long',
-        year:    'numeric',
-        month:   'long',
-        day:     'numeric',
-      },
-      timeFormat: {                     // Intl.DateTimeFormat options for the time line
-        hour:    '2-digit',
-        minute:  '2-digit',
-        second:  '2-digit',
-        hour12:  false,
-      },
-      clockInterval:  1000,             // ms between clock ticks
-    };
-    
-    // Cache DOM refs
-    const $date  = document.getElementById('date');
-    const $clock = document.getElementById('clock');
-    
-    // Auto UTC offset from CONFIG.timezone
-    const tzOffset = (() => {
-      const now = new Date();
-      const parts = new Intl.DateTimeFormat('en-US', {
-        timeZone: CONFIG.timezone,
-        timeZoneName: 'shortOffset',
-      }).formatToParts(now);
-      const name = parts.find(p => p.type === 'timeZoneName')?.value ?? '';
-      // shortOffset gives e.g. "GMT+7" — reformat to "(UTC +7)"
-      return '(' + name.replace('GMT', 'UTC').replace(/([+-])(\d)$/, '$1$2') + ')';
-    })();
-    document.getElementById('tz').textContent = tzOffset;
-    
-    // Local time
-    const fmtDate = new Intl.DateTimeFormat(CONFIG.clockLocale, { ...CONFIG.dateFormat, timeZone: CONFIG.timezone });
-    const fmtTime = new Intl.DateTimeFormat(CONFIG.clockLocale, { ...CONFIG.timeFormat, timeZone: CONFIG.timezone });
-    
-    let lastDate = '';
-    function tick() {
-      const now = new Date();
-      const d = fmtDate.format(now);
-      if (d !== lastDate) { $date.textContent = lastDate = d; }
-      $clock.textContent = fmtTime.format(now);
-    }
-    setInterval(tick, CONFIG.clockInterval);
-    tick();
-    
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-    
-    // Marquee
-    const track = document.getElementById('skill-track');
-    const frag  = document.createDocumentFragment();
-    for (const item of track.children) {
-      const clone = item.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      frag.appendChild(clone);
-    }
-    track.appendChild(frag);
-  </script>
+        let lastDate = '';
+        function tick() {
+          const now = new Date();
+          const d = fmtDate.format(now);
+          if (d !== lastDate) dateEl.textContent = lastDate = d;
+          clockEl.textContent = fmtTime.format(now);
+        }
+        setInterval(tick, 1000);
+        tick();
+
+        const spotlight = $('spotlight');
+        const cards = document.querySelectorAll('.card');
+        const setGlow = (v) => { cards.forEach(c => c.style.setProperty('--glow', v)); };
+
+        document.querySelectorAll('.grid > *').forEach((el, i) => { el.style.setProperty('--i', i); });
+
+        let isScrolling = false, scrollTimer;
+        window.addEventListener('scroll', () => {
+          isScrolling = true;
+          setGlow('0');
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(() => { isScrolling = false; }, 150);
+        }, { passive: true });
+
+        const isMouse = e => e.pointerType === 'mouse';
+        let px, py, rafPending;
+
+        window.addEventListener('pointermove', (e) => {
+          if (!isMouse(e) || isScrolling) return;
+          px = e.clientX; py = e.clientY;
+          if (!rafPending) {
+            rafPending = true;
+            requestAnimationFrame(() => {
+              spotlight.style.setProperty('--x', `${px}px`);
+              spotlight.style.setProperty('--y', `${py}px`);
+              setGlow('1');
+              const len = cards.length;
+              for (let i = 0; i < len; i++) {
+                const rect = cards[i].getBoundingClientRect();
+                cards[i].style.setProperty('--mx', px - rect.left);
+                cards[i].style.setProperty('--my', py - rect.top);
+              }
+              rafPending = false;
+            });
+          }
+        });
+
+        window.addEventListener('pointerleave', () => {
+          if (!isScrolling) setGlow('0');
+        });
+
+        document.addEventListener('selectstart', (e) => {
+          if (!e.target.closest('.about')) e.preventDefault();
+        });
+
+        document.addEventListener('pointerdown', (e) => {
+          if (!e.target.closest('.about')) window.getSelection()?.removeAllRanges();
+        });
+
+
+    </script>
 </body>
 
 </html>
