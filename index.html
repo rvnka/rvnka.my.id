@@ -48,8 +48,8 @@
           --color-ink-2:         #88889a;
           --color-ink-3:         #5a5a6e;
           --color-ink-4:         #3a3a4a;
-          --color-accent:        #a371f7;
-          --color-accent-soft:   rgba(163, 113, 247, 0.1);
+          --color-accent:        #34d399;
+          --color-accent-soft:   rgba(52, 211, 153, 0.1);
 
           --font-body:      'MiSans', system-ui, -apple-system, sans-serif;
           --space-main:     clamp(16px, 2.5vw, 24px);
@@ -60,8 +60,15 @@
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        ::selection { background: rgba(163, 113, 247, 0.2); }
+        ::selection { background: rgba(52, 211, 153, 0.2); }
         * { -webkit-tap-highlight-color: transparent; }
+
+        :root {
+          --cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><circle cx='10' cy='10' r='5' fill='none' stroke='%2334d399' stroke-width='1.5' opacity='0.7'/><circle cx='10' cy='10' r='1.5' fill='%23fff'/></svg>") 10 10;
+          --cursor-pointer: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22'><circle cx='11' cy='11' r='5' fill='none' stroke='%2334d399' stroke-width='1.5' opacity='0.7'/><circle cx='11' cy='11' r='2.5' fill='%2334d399'/></svg>") 11 11;
+        }
+        html { cursor: var(--cursor), auto; }
+        a, button, .btn-icon, .badge, .link-item, .link-tag, input, select, textarea { cursor: var(--cursor-pointer), pointer; }
 
         body {
           font-family: var(--font-body);
@@ -93,9 +100,9 @@
 
         .orb { position: absolute; border-radius: 50%; filter: blur(80px); will-change: transform; }
 
-        .orb-1 { width: 500px; height: 500px; background: rgba(163, 113, 247, 0.10); top: -15%; left: -10%; animation: orb-float-1 25s ease-in-out infinite; }
-        .orb-2 { width: 400px; height: 400px; background: rgba(88, 166, 255, 0.07); bottom: -10%; right: -10%; animation: orb-float-2 30s ease-in-out infinite; }
-        .orb-3 { width: 350px; height: 350px; background: rgba(163, 113, 247, 0.06); top: 50%; left: 50%; transform: translate(-50%, -50%); animation: orb-float-3 20s ease-in-out infinite; }
+        .orb-1 { width: 500px; height: 500px; background: rgba(52, 211, 153, 0.10); top: -15%; left: -10%; animation: orb-float-1 25s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+        .orb-2 { width: 400px; height: 400px; background: rgba(88, 166, 255, 0.07); bottom: -10%; right: -10%; animation: orb-float-2 30s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+        .orb-3 { width: 350px; height: 350px; background: rgba(52, 211, 153, 0.06); top: 50%; left: 50%; transform: translate(-50%, -50%); animation: orb-float-3 20s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
 
         @keyframes orb-float-1 {
           0%, 100% { transform: translate(0, 0); }
@@ -116,11 +123,16 @@
 
         .ambient-noise {
           position: absolute; inset: 0;
-          opacity: 0.015;
+          opacity: 0.025;
           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
           background-repeat: repeat;
           background-size: 256px 256px;
           mix-blend-mode: overlay;
+          animation: noise-drift 12s ease-in-out infinite;
+        }
+        @keyframes noise-drift {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(-1px, -1px) scale(1.02); }
         }
 
         .spotlight { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(450px circle at var(--x,50%) var(--y,50%), rgba(255,255,255,0.03), transparent 50%); }
@@ -171,7 +183,7 @@
           overflow: hidden;
           touch-action: pan-y pinch-zoom;
           box-shadow: 0 4px 24px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.04);
-          transition: box-shadow 0.3s;
+          transition: box-shadow 0.3s, backdrop-filter 0.3s;
           contain: paint layout style;
 
           --mx: 0;
@@ -181,7 +193,7 @@
 
         .card::before, .card::after {
           content: ""; position: absolute; inset: 0; border-radius: inherit;
-          pointer-events: none; transition: opacity 0.3s; opacity: var(--glow);
+          pointer-events: none; transition: opacity 0.5s ease; opacity: var(--glow);
         }
         .card::before {
           padding: 1px;
@@ -190,7 +202,7 @@
           -webkit-mask-composite: xor; mask-composite: exclude;
         }
         .card::after {
-          background: radial-gradient(350px circle at calc(var(--mx)*1px) calc(var(--my)*1px), rgba(163,113,247,0.12), transparent 60%);
+          background: radial-gradient(350px circle at calc(var(--mx)*1px) calc(var(--my)*1px), rgba(52,211,153,0.10), transparent 60%);
         }
 
         .card-head {
@@ -227,15 +239,15 @@
           height: var(--avatar-size);
           border-radius: 50%;
           object-fit: cover;
-          border: 2px solid rgba(163,113,247,0.25);
-          box-shadow: 0 0 24px rgba(163,113,247,0.1);
+          border: 2px solid rgba(52,211,153,0.25);
+          box-shadow: 0 0 24px rgba(52,211,153,0.10);
           flex-shrink: 0;
           transition: border-color 0.3s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
         }
         .avatar:hover {
           border-color: var(--color-accent);
           transform: scale(1.06);
-          box-shadow: 0 0 40px rgba(163,113,247,0.18);
+          box-shadow: 0 0 40px rgba(52,211,153,0.18);
         }
 
         .profile-info { min-width: 0; }
@@ -308,6 +320,9 @@
           scrollbar-width: thin;
           scrollbar-color: rgba(255,255,255,0.08) transparent;
           user-select: text;
+          padding: 8px 0;
+          -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
         }
 
         .section-divider {
@@ -329,13 +344,16 @@
 
         /* --- Skills --- */
         .skills {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+          display: flex;
+          flex-wrap: wrap;
           gap: 6px;
-          justify-items: center;
+          justify-content: center;
           overflow-y: auto;
           scrollbar-width: thin;
           scrollbar-color: rgba(255,255,255,0.08) transparent;
+          padding: 6px 0;
+          -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
         }
 
         .card:has(.about, .link-list) {
@@ -350,25 +368,41 @@
           flex: 1;
         }
 
+        .skills ul, .skills li { display: contents; list-style: none; }
+
         .badge {
-          background: rgba(163, 113, 247, 0.06);
+          background: rgba(52, 211, 153, 0.06);
           color: var(--color-ink-1);
           font-size: 0.7rem;
           padding: 4px 12px;
           border-radius: 999px;
-          border: 1px solid rgba(163, 113, 247, 0.12);
+          border: 1px solid rgba(52, 211, 153, 0.12);
           white-space: nowrap;
           touch-action: manipulation;
           transition: background 0.2s, border-color 0.2s, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
         }
         .badge:hover {
-          background: rgba(163, 113, 247, 0.12);
-          border-color: rgba(163, 113, 247, 0.3);
+          background: rgba(52, 211, 153, 0.12);
+          border-color: rgba(52, 211, 153, 0.3);
           transform: translateY(-1px);
-          box-shadow: 0 2px 12px rgba(163, 113, 247, 0.12);
+          box-shadow: 0 2px 12px rgba(52, 211, 153, 0.12);
         }
         /* --- Links --- */
-        .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; justify-content: center; }
+        .btn-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-bottom: 12px;
+          justify-content: center;
+          flex-shrink: 0;
+          max-height: 96px;
+          overflow-y: auto;
+          padding: 4px 0;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255,255,255,0.08) transparent;
+          -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+        }
 
         .btn-icon {
           width: 40px;
@@ -384,7 +418,7 @@
           touch-action: manipulation;
           transition: background 0.2s, border-color 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
         }
-        .btn-icon:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.14); transform: translateY(-3px); box-shadow: 0 4px 16px rgba(163,113,247,0.12); }
+        .btn-icon:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.14); transform: translateY(-3px); box-shadow: 0 4px 16px rgba(52,211,153,0.10); }
         .btn-icon:active { transform: translateY(0) scale(0.95); transition-duration: 0.08s; }
 
         .link-list {
@@ -394,6 +428,9 @@
           overflow-y: auto;
           scrollbar-width: thin;
           scrollbar-color: rgba(255,255,255,0.08) transparent;
+          padding: 8px 0;
+          -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 3%, black 97%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 3%, black 97%, transparent 100%);
         }
 
         .card:has(.about) .skills, .card:has(.link-list) .link-list { flex: 1; min-height: 0; }
@@ -406,7 +443,7 @@
           touch-action: manipulation;
           transition: background 0.2s, border-color 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
         }
-        .link-item:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(163,113,247,0.08); }
+        .link-item:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(52,211,153,0.08); }
         .link-item:active { transform: translateY(0) scale(0.99); transition-duration: 0.08s; }
 
         .link-icon {
@@ -414,7 +451,7 @@
           border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; color: var(--color-ink-2); flex-shrink: 0;
           transition: color 0.2s, border-color 0.2s;
         }
-        .link-item:hover .link-icon { color: var(--color-accent); border-color: rgba(163,113,247,0.25); }
+        .link-item:hover .link-icon { color: var(--color-accent); border-color: rgba(52,211,153,0.25); }
 
         .link-detail { flex: 1; overflow: hidden; }
         .link-title, .link-url { display: block; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -435,7 +472,7 @@
           border-radius: 4px;
           margin-left: 6px;
           vertical-align: middle;
-          border: 1px solid rgba(163,113,247,0.18);
+          border: 1px solid rgba(52,211,153,0.18);
         }
 
         /* --- Footer --- */
@@ -495,10 +532,40 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .orb, .grid > * { animation: none; }
+          .orb, .grid > *, .ambient-noise, .trail-streak, .spark-dot, .spark-container { animation: none; }
           .grid > * { opacity: 1; transform: none; }
           :is(.card, .card::before, .card::after, .link-item, .btn-icon, .badge, .avatar, .footer a) { transition: none; transform: none; }
           .badge:hover, .link-item:hover .link-arrow { transform: none; }
+        }
+
+        @keyframes spark-pop {
+          to { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+        }
+        .spark-container { position: fixed; inset: 0; z-index: 999; pointer-events: none; }
+        .spark-dot {
+          position: absolute; width: var(--s, 4px); height: var(--s, 4px); border-radius: 50%;
+          background: var(--c, #34d399);
+          animation: spark-pop 0.5s cubic-bezier(0, 0.7, 0.3, 1) forwards;
+        }
+        @keyframes trail-streak {
+          to { opacity: 0; }
+        }
+        .trail-streak {
+          position: fixed; height: 1px; pointer-events: none; z-index: 998;
+          border-radius: 0.5px; transform-origin: 0 50%;
+          background: var(--color-accent);
+          animation: trail-streak 0.5s ease-out forwards;
+        }
+
+        @keyframes flashbang {
+          0% { opacity: 1; }
+          33% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+        .flashbang {
+          position: fixed; inset: 0; z-index: 99999; pointer-events: none;
+          background: #fff;
+          animation: flashbang 3s ease-out forwards;
         }
     </style>
 </head>
@@ -540,23 +607,23 @@
                 <div class="card-body">
                     <p class="about">
                         <del>An idle vocational student</del><br>
-                        I'm a beginner developer, editor, and student who enjoys learning new things and breaking stuff‽. I build things out of curiosity - for the fun of seeing ideas turn into something real.
+                        I'm an vocational student who want to be an developer and editor, who enjoys learning new things and breaking stuff‽. I build things out of curiosity. for the fun of seeing ideas turn into something real.
                     </p>
                     <div class="section-divider"></div>
                     <p class="section-label"><i class="bi bi-lightning-charge-fill" aria-hidden="true"></i> Skills</p>
-                    <div class="skills">
-                        <span class="badge">NodeJS</span>
-                        <span class="badge">Python</span>
-                        <span class="badge">NextJS</span>
-                        <span class="badge">React</span>
-                        <span class="badge">JavaScript</span>
-                        <span class="badge">TypeScript</span>
-                        <span class="badge">HTML</span>
-                        <span class="badge">CSS</span>
-                        <span class="badge">Tailwind</span>
-                        <span class="badge">Git</span>
-                        <span class="badge">REST API</span>
-                        <span class="badge">Linux</span>
+                     <div class="skills">
+                        <ul role="list">
+                            <li><span class="badge">NodeJS</span></li>
+                            <li><span class="badge">Python</span></li>
+                            <li><span class="badge">NextJS</span></li>
+                            <li><span class="badge">React</span></li>
+                            <li><span class="badge">JavaScript</span></li>
+                            <li><span class="badge">TypeScript</span></li>
+                            <li><span class="badge">HTML</span></li>
+                            <li><span class="badge">CSS</span></li>
+                            <li><span class="badge">Tailwind</span></li>
+                            <li><span class="badge">Linux</span></li>
+                        </ul>
                     </div>
                 </div>
             </section>
@@ -566,12 +633,14 @@
                 <div class="card-body">
                     <div class="btn-row">
                         <a class="btn-icon" href="https://github.com/rvnka" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
-                        <a class="btn-icon" href="https://www.youtube.com/@rvnka_yt" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube" aria-hidden="true"></i></a>
+                        <a class="btn-icon" href="https://www.youtube.com/@rvnka_labs" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube" aria-hidden="true"></i></a>
+                        <a class="btn-icon" href="javascript:void(0)" target="_blank" rel="noopener noreferrer" aria-label="Placeholder (don't remove)"><i class="bi bi-ban" aria-hidden="true"></i></a>
+                    </div>
                     <nav class="link-list" aria-label="Links">
                         <a class="link-item" href="https://site.rvnka.my.id/" target="_blank" rel="noopener noreferrer">
                             <div class="link-icon"><i class="bi bi-window" aria-hidden="true"></i></div>
                             <div class="link-detail">
-                                <span class="link-title">Website <span class="link-tag">in dev</span></span>
+                                <span class="link-title">Website <span class="link-tag">in development</span></span>
                                 <span class="link-url">site.rvnka.my.id</span>
                             </div>
                             <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
@@ -579,8 +648,32 @@
                         <a class="link-item" href="#">
                             <div class="link-icon"><i class="bi bi-lightning-charge-fill" aria-hidden="true"></i></div>
                             <div class="link-detail">
-                                <span class="link-title">Rest API</span>
+                                <span class="link-title">Rest API <span class="link-tag">comingsoon</span></span>
                                 <span class="link-url">Coming soon</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                        <a class="link-item" href="https://github.com/rvnka" target="_blank" rel="noopener noreferrer">
+                            <div class="link-icon"><i class="bi bi-github" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">GitHub Profile</span>
+                                <span class="link-url">github.com/rvnka</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                        <a class="link-item" href="https://www.youtube.com/@rvnka_labs" target="_blank" rel="noopener noreferrer">
+                            <div class="link-icon"><i class="bi bi-youtube" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">YouTube Channel</span>
+                                <span class="link-url">youtube.com/@rvnka_yt</span>
+                            </div>
+                            <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
+                        </a>
+                         <a class="link-item" href="#[HIDDEN]" onclick="doFlashbang();">
+                            <div class="link-icon"><i class="bi bi-gift" aria-hidden="true"></i></div>
+                            <div class="link-detail">
+                                <span class="link-title">Special Gift <span class="link-tag">for you</span></span>
+                                <span class="link-url">[HIDDEN]</span>
                             </div>
                             <i class="bi bi-chevron-right link-arrow" aria-hidden="true"></i>
                         </a>
@@ -626,15 +719,30 @@
         const cards = document.querySelectorAll('.card');
         const setGlow = (v) => { cards.forEach(c => c.style.setProperty('--glow', v)); };
 
+        const bangAudio = new Audio('https://www.myinstants.com/media/sounds/flashbang-cs_qoRhxLn.mp3');
+        bangAudio.preload = 'auto';
+        bangAudio.volume = 1;
+
+        function doFlashbang() {
+          const f = Object.assign(document.createElement('div'), { className: 'flashbang' });
+          document.body.appendChild(f);
+          bangAudio.currentTime = 0; bangAudio.play().catch(()=>{});
+          setTimeout(() => f.remove(), 2700);
+        }
+
         document.querySelectorAll('.grid > *').forEach((el, i) => { el.style.setProperty('--i', i); });
 
         let isScrolling = false, scrollTimer;
-        window.addEventListener('scroll', () => {
+        const onScroll = () => {
           isScrolling = true;
           setGlow('0');
           clearTimeout(scrollTimer);
-          scrollTimer = setTimeout(() => { isScrolling = false; }, 150);
-        }, { passive: true });
+          scrollTimer = setTimeout(() => { isScrolling = false; }, 200);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        document.querySelectorAll('.about, .skills, .link-list').forEach(el => {
+          el.addEventListener('scroll', onScroll, { passive: true });
+        });
 
         const isMouse = e => e.pointerType === 'mouse';
         let px, py, rafPending;
@@ -671,7 +779,47 @@
           if (!e.target.closest('.about')) window.getSelection()?.removeAllRanges();
         });
 
+        const isInteract = t => t.closest('a, button, input, textarea, select, .btn-icon, .badge, .link-item');
+        const sparkColors = ['#fff','#34d399','#a7f3d0'];
+        document.addEventListener('click', (e) => {
+          if (isInteract(e.target)) return;
+          const cx = e.clientX, cy = e.clientY;
+          const c = Object.assign(document.createElement('div'), { className: 'spark-container' });
+          for (let i = 0; i < 10; i++) {
+            const d = Object.assign(document.createElement('div'), { className: 'spark-dot' });
+            const a = Math.random() * 360, r = 20 + Math.random() * 40;
+            d.style.cssText = `left:${cx}px;top:${cy}px;--dx:${Math.cos(a)*r}px;--dy:${Math.sin(a)*r}px;--s:${2+Math.random()*3}px;--c:${sparkColors[Math.random()*sparkColors.length|0]};animation-delay:${(Math.random()*0.04).toFixed(3)}s;`;
+            c.appendChild(d);
+          }
+          document.body.appendChild(c);
+          setTimeout(() => c.remove(), 600);
+        });
 
+        let lx, ly, lt;
+        window.addEventListener('pointermove', (e) => {
+          if (!isMouse(e) || !lt) { lx = e.clientX; ly = e.clientY; lt = Date.now(); return; }
+          const dt = Date.now() - lt, dx = e.clientX - lx, dy = e.clientY - ly;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const speed = dist / dt;
+          if (speed > 0.25 && dist > 2) {
+            const d = Object.assign(document.createElement('div'), { className: 'trail-streak' });
+            const ang = Math.atan2(dy, dx) * 180 / Math.PI;
+            const b = Math.min(speed * 2, 1) * 0.5;
+            d.style.cssText = `left:${lx}px;top:${ly-0.5}px;width:${dist}px;opacity:${b};transform:rotate(${ang}deg)`;
+            document.body.appendChild(d);
+            setTimeout(() => d.remove(), 550);
+          }
+          lx = e.clientX; ly = e.clientY; lt = Date.now();
+        }, { passive: true });
+
+        let clickCount = 0, clickTarget = 0;
+        document.querySelector('.avatar')?.addEventListener('click', () => {
+          if (!clickTarget) clickTarget = 10 + Math.random() * 11 | 0;
+          if (++clickCount >= clickTarget) {
+            clickCount = 0; clickTarget = 0;
+            doFlashbang();
+          }
+        });
     </script>
 </body>
 
